@@ -1,18 +1,33 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 function Feature() {
+    const [movies, setMovies] = useState([]);
+    const navigate = useNavigate();
+
+
+    useEffect(() => {
+        (async function getMovies() {
+            const response = await axios.get(
+                `https://api.themoviedb.org/3/movie/now_playing?api_key=${import.meta.env.VITE_TMDB_KEY}`
+            );
+            setMovies(response.data.results);
+        })();
+    }, []);
+
+    function loadMovie(id) {
+        navigate(`/movies/${id}`);
+    }
+
     return (
-    <div>
-        <div class="section_title_featured">Featured</div>
-        <div class="featured">
-            <div class="poster a"><img src="https://web.postman.co/workspace/My-Workspace~629707ee-9d91-45fc-8ef4-8d45bc41c6c7/request/39912924-43414b52-188d-4e2d-b7ce-c1bb68b7f8f2?action=share&source=copy-link&creator=39912924" alt="Movie poster" class="posterPicture"></img></div>
-            <div class="poster b"><img src="https://web.postman.co/workspace/My-Workspace~629707ee-9d91-45fc-8ef4-8d45bc41c6c7/request/39912924-43414b52-188d-4e2d-b7ce-c1bb68b7f8f2?action=share&source=copy-link&creator=39912924" alt="Movie poster" class="posterPicture"></img></div>
-            <div class="poster c"><img src="https://web.postman.co/workspace/My-Workspace~629707ee-9d91-45fc-8ef4-8d45bc41c6c7/request/39912924-43414b52-188d-4e2d-b7ce-c1bb68b7f8f2?action=share&source=copy-link&creator=39912924" alt="Movie poster" class="posterPicture"></img></div>
-            <div class="poster d"><img src="https://web.postman.co/workspace/My-Workspace~629707ee-9d91-45fc-8ef4-8d45bc41c6c7/request/39912924-43414b52-188d-4e2d-b7ce-c1bb68b7f8f2?action=share&source=copy-link&creator=39912924" alt="Movie poster" class="posterPicture"></img></div>
-            <div class="poster e"><img src="https://web.postman.co/workspace/My-Workspace~629707ee-9d91-45fc-8ef4-8d45bc41c6c7/request/39912924-43414b52-188d-4e2d-b7ce-c1bb68b7f8f2?action=share&source=copy-link&creator=39912924" alt="Movie poster" class="posterPicture"></img></div>
-            <div class="poster f"><img src="https://web.postman.co/workspace/My-Workspace~629707ee-9d91-45fc-8ef4-8d45bc41c6c7/request/39912924-43414b52-188d-4e2d-b7ce-c1bb68b7f8f2?action=share&source=copy-link&creator=39912924" alt="Movie poster" class="posterPicture"></img></div>
-            <div class="poster g"><img src="https://web.postman.co/workspace/My-Workspace~629707ee-9d91-45fc-8ef4-8d45bc41c6c7/request/39912924-43414b52-188d-4e2d-b7ce-c1bb68b7f8f2?action=share&source=copy-link&creator=39912924" alt="Movie poster" class="posterPicture"></img></div>
-            <div class="poster h"><img src="https://web.postman.co/workspace/My-Workspace~629707ee-9d91-45fc-8ef4-8d45bc41c6c7/request/39912924-43414b52-188d-4e2d-b7ce-c1bb68b7f8f2?action=share&source=copy-link&creator=39912924" alt="Movie poster" class="posterPicture"></img></div>
+        <div>
+            <div class="section_title_featured">Featured</div>
+            {movies.map((movie) => (
+                <div class="featured" >
+                    <div class="poster a" key={movie.id} onClick={() => { loadMovie(movie.id) }}><img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt="Movie poster" class="posterPicture"></img></div>
+                </div>
+            ))}
         </div>
-    </div>
     )
 }
 export default Feature;

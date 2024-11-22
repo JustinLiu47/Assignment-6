@@ -8,7 +8,7 @@ import DetailView from "./views/DetailView"
 
 function App() {
   return (
-    
+    <HomeView/>
   )
 }
 
