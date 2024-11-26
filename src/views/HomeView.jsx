@@ -5,14 +5,14 @@ import Footer from "../components/Footer"
 
 function HomeView() {
   return (
-    <body>
+    <div>
       <Header/>
       <div>
         <Hero/>
         <Feature/>
       </div>
       <Footer/>
-    </body>
+    </div>
   )
 }
 
