@@ -23,12 +23,11 @@ function Feature() {
     return (
         <div>
             <div className="section_title_featured">Featured</div>
-            
-                <div className="featured" >
-                    {movies.map((movie) => (
-                    <div className="poster a" key={movie.id} onClick={() => { /* loadMovie(movie.id) */ }}>
+                <div className="featured">
+                    {movies.slice(0, 10).map((movie) => (
+                    <div className="poster" key={movie.id} onClick={() => { /* loadMovie(movie.id) */ }}>
                         <img 
-                            src={`https://image.tmdb.org/t/p/w350${movie.poster_path}`} 
+                            src={`https://image.tmdb.org/t/p/original${movie.poster_path}`} 
                             alt="Movie poster" 
                             className="posterPicture"
                         />
