@@ -1,10 +1,10 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function Feature() {
     const [movies, setMovies] = useState([]);
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
     function shuffle(array) {
         let currentIndex = array.length;
         while (currentIndex != 0) {

@@ -1,12 +1,13 @@
-*{
+* {
   padding: 0px;
   margin: 0px;
 }
+
 .header {
   background: linear-gradient(90deg, rgb(255, 0, 0) 0%, rgb(100, 0, 0) 100%);
   display: grid;
-  grid-template-areas: "a b title signup signin";
-  grid-template-columns: auto auto 1fr auto auto; 
+  grid-template-areas: "a b title signup signin logout";
+  grid-template-columns: auto auto 1fr auto auto auto;
   align-items: center;
   width: 100%;
   height: 175px;
@@ -17,11 +18,12 @@
   color: white;
   text-align: center;
   font-size: 105px;
-  padding: 20px 0; /* Center the title with padding */
+  padding: 20px 0;
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
-.balance1 {
-  grid-area: a;
+
+.balance1, .balance2 {
+  grid-area: a, b;
   border-radius: 5px;
   border-width: 0px;
   padding: 20px;
@@ -29,24 +31,21 @@
   width: 175px;
   visibility: hidden;
 }
-.balance2 {
-  grid-area: b;
+
+.signup, .signin, .logout {
   border-radius: 5px;
-  border-width: 0px;
-  padding: 20px;
-  margin-left: 10px;
-  width: 175px;
-  visibility: hidden;
-}
-.signup {
-  grid-area: signup;
-  border-radius: 5px;
-  background-color: lawngreen;
   border-width: 0px;
   padding: 20px;
   margin-right: 10px;
   width: 175px;
   font-size: 30px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.signup {
+  grid-area: signup;
+  background-color: lawngreen;
 }
 
 .signup:hover {
@@ -55,48 +54,51 @@
 
 .signin {
   grid-area: signin;
-  border-radius: 5px;
   background-color: aqua;
-  border-width: 0px;
-  padding: 20px;
-  margin-right: 10px;
-  width: 175px;
-  font-size: 30px;
 }
-.signin:hover{
-  background-color:rgb(0, 199, 199);
+
+.signin:hover {
+  background-color: rgb(0, 199, 199);
 }
-.hero{
+
+.logout {
+  grid-area: logout;
+  background-color: red;
+  color: white;
+}
+
+.logout:hover {
+  background-color: darkred;
+}
+
+.hero {
   background: linear-gradient(0deg, rgb(255,0,0) 0%, yellow 50%, blue 100%);
   display: grid;
-  grid-template-areas: 
-  "a b"
-  "c b";
-  grid-template-columns: auto right; 
-  grid-template-columns: auto right; 
+  grid-template-areas: "a b" "c b";
+  grid-template-columns: auto right;
   justify-items: right;
   height: 700px;
 }
-.HeroImg{
+
+.HeroImg {
   grid-area: b;
   margin-right: 0px;
   height: 700px;
   opacity: 0.8;
 }
-.HeroTitle{
-  color: white;
-  background-color: rgba(0,0,0,0.5);
 
+.HeroTitle, .HeroText {
+  color: white;
+  background-color: rgba(0, 0, 0, 0.5);
   padding: 20px;
   font-size: 50px;
 }
-.HeroText{
-  color: white;
-  background-color: rgba(0,0,0,0.5);
-  padding: 20px;
+
+.HeroText {
   font-size: 30px;
 }
-.featured{
+
+.featured {
   background: linear-gradient(0deg, rgb(255,255,255) 0%, rgb(127,127,127) 50%, black 100%);
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -107,6 +109,7 @@
   height: 875px;
   padding: 30px;
 }
+
 .footer {
   display: flex;
   justify-content: flex-end;
@@ -115,7 +118,8 @@
   height: 125px;
   padding: 0 20px;
 }
-.footerItem{
+
+.footerItem {
   text-decoration: none;
   font-family: Arial, sans-serif;
   font-size: 16px;
@@ -127,23 +131,26 @@
   transition: background-color 0.3s;
   margin-right: 10px;
 }
-  
-.footerItem:hover{
+
+.footerItem:hover {
   background-color: #f0e68c;
 }
-.section_title_featured{
-  width:100%;
+
+.section_title_featured {
+  width: 100%;
   background-color: black;
   color: white;
-  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
   font-size: 50px;
   text-align: center;
 }
-.posterPicture{
-  height:350px;
-  width:250px;
+
+.posterPicture {
+  height: 350px;
+  width: 250px;
 }
-.poster{
+
+.poster {
   background-color: lightgray;
   width: 250px;
   height: 350px;
@@ -164,3 +171,135 @@
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
 }
 
+.login-container {
+  width: 100%;
+  max-width: 400px;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.75);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  text-align: center;
+}
+
+.form-container h2 {
+  font-size: 2em;
+  margin-bottom: 20px;
+}
+
+.form-container label {
+  display: block;
+  text-align: left;
+  margin: 10px 0 5px;
+  font-size: 0.9em;
+  color: #b3b3b3;
+}
+
+.form-container input[type="email"],
+.form-container input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  background: #333;
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+  font-size: 1em;
+  margin-bottom: 10px;
+}
+
+.login-button {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  background: #e50914;
+  color: #fff;
+  font-size: 1em;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.login-button:hover {
+  background: #f40612;
+}
+
+.register-link {
+  margin-top: 15px;
+  font-size: 0.9em;
+  color: #b3b3b3;
+}
+
+.register-link a {
+  color: #e50914;
+}
+
+.movie-detail {
+  background-color: #141414;
+  color: white;
+  padding: 20px;
+  max-width: 800px;
+  margin: auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.movie-title {
+  font-size: 2.5em;
+  margin-bottom: 10px;
+}
+
+.movie-overview {
+  font-size: 1.2em;
+  margin: 15px 0;
+  line-height: 1.5;
+}
+
+.movie-info {
+  font-size: 1em;
+  margin: 20px 0;
+}
+
+.movie-poster {
+  width: 100%;
+  border-radius: 10px;
+  margin: 15px 0;
+}
+
+.trailers-section {
+  margin-top: 30px;
+}
+
+.trailers-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 15px;
+}
+
+.trailer-tile {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.trailer-tile:hover {
+  transform: scale(1.05);
+}
+
+.trailer-thumbnail {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.trailer-tile h3 {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  color: white;
+  font-size: 0.9em;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 5px;
+  border-radius: 4px;
+}
