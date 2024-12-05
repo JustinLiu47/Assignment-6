@@ -5,7 +5,7 @@ import LoginView from "./views/LoginView";
 import MoviesView from "./views/MoviesView";
 import DetailView from "./views/DetailView";
 import GenreView from "./views/GenreView";
-import { AuthProvider } from './AuthContext';
+import { AuthProvider } from './context/AuthContext';
 import './App.css'
 
 function App() {
