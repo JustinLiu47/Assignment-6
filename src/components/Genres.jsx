@@ -1,3 +1,5 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function Genres() {
@@ -14,13 +16,11 @@ function Genres() {
   }, []);
 
   return (
-    <div>
-      <ul>
+    <div className="genres-container">
+      <h2 className="section-title">Browse by Genre</h2>
+      <ul className="genres-list">
         {genres.map((genre) => (
-          <li
-            key={genre.id}
-            onClick={() => navigate(`/movies/genre/${genre.id}`)}
-          >
+          <li key={genre.id} onClick={() => navigate(`/movies/genre/${genre.id}`)} className="genre-item">
             {genre.name}
           </li>
         ))}

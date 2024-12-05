@@ -41,7 +41,7 @@ function LoginView() {
           <button type="submit" className="login-button">Login</button>
         </form>
         <p className="register-link">
-          New to Netflix? 
+          New to Netflix?
           <span className="register-link-text" onClick={() => navigate('/register')}>
             Register now
           </span>

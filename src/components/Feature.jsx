@@ -18,20 +18,20 @@ function Feature() {
         (async function getMovies() {
             const response = await axios.get(
                 `https://api.themoviedb.org/3/movie/now_playing?api_key=${import.meta.env.VITE_TMDB_KEY}`
-              );
-              const moviesList = [];
-              shuffle(response.data.results);
-              moviesList.push(response.data.results.pop());
-              moviesList.push(response.data.results.pop());
-              moviesList.push(response.data.results.pop());
-              moviesList.push(response.data.results.pop());
-              moviesList.push(response.data.results.pop());
-              moviesList.push(response.data.results.pop());
-              moviesList.push(response.data.results.pop());
-              moviesList.push(response.data.results.pop());
-              moviesList.push(response.data.results.pop());
-              moviesList.push(response.data.results.pop());
-              setMovies(moviesList);
+            );
+            const moviesList = [];
+            shuffle(response.data.results);
+            moviesList.push(response.data.results.pop());
+            moviesList.push(response.data.results.pop());
+            moviesList.push(response.data.results.pop());
+            moviesList.push(response.data.results.pop());
+            moviesList.push(response.data.results.pop());
+            moviesList.push(response.data.results.pop());
+            moviesList.push(response.data.results.pop());
+            moviesList.push(response.data.results.pop());
+            moviesList.push(response.data.results.pop());
+            moviesList.push(response.data.results.pop());
+            setMovies(moviesList);
         })();
     }, []);
 

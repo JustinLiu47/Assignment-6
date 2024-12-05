@@ -5,34 +5,74 @@ import { useParams } from "react-router-dom";
 
 function GenreView() {
     const [movies, setMovies] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(1);
     const params = useParams();
     const navigate = useNavigate();
+
     useEffect(() => {
         (async function getGenreMovies() {
-            const response = await axios.get(
-                `https://api.themoviedb.org/3/movie/genre/${params.id}?api_key=${import.meta.env.VITE_TMDB_KEY}`
-            );
-            setMovies(response.data.results);
+            try {
+                const response = await axios.get(
+                    `https://api.themoviedb.org/3/discover/movie?with_genres=${params.id}&page=${currentPage}&api_key=${import.meta.env.VITE_TMDB_KEY}`
+                );
+                setMovies(response.data.results);
+                setTotalPages(response.data.total_pages);
+            } catch (error) {
+                console.error("Error fetching movies: ", error);
+            }
         })();
-    }, []);
+    }, [params.id, currentPage]);
 
     function loadMovie(id) {
         navigate(`/movies/${id}`);
     }
 
+    const nextPage = () => {
+        if (currentPage < totalPages) {
+            setCurrentPage(currentPage + 1);
+        }
+    };
+
+    const prevPage = () => {
+        if (currentPage > 1) {
+            setCurrentPage(currentPage - 1);
+        }
+    };
+
     return (
         <div>
-            <div className="section_title">Genre</div>
+            <h2>Movies in this Genre</h2>
             <div className="genre">
-                {movies.map((movie) => (
-                    <div className="poster" key={movie.id} onClick={() => { loadMovie(movie.id) }}>
-                        <img
-                            src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
-                            alt="Movie poster"
-                            className="posterPicture"
-                        />
-                    </div>
-                ))}
+                {movies.length > 0 ? (
+                    movies.map((movie) => (
+                        movie.poster_path ? (
+                            <div
+                                className="poster"
+                                key={movie.id}
+                                onClick={() => loadMovie(movie.id)}
+                            >
+                                <img
+                                    src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
+                                    alt={movie.title}
+                                    className="posterPicture"
+                                />
+                            </div>
+                        ) : null
+                    ))
+                ) : (
+                    <p>No movies found for this genre.</p>
+                )}
+            </div>
+
+            <div className="pagination">
+                <button onClick={prevPage} disabled={currentPage === 1}>
+                    Previous
+                </button>
+                <span>Page {currentPage} of {totalPages}</span>
+                <button onClick={nextPage} disabled={currentPage === totalPages}>
+                    Next
+                </button>
             </div>
         </div>
     );
