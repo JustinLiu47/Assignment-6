@@ -4,6 +4,7 @@ import RegisterView from "./views/RegisterView";
 import LoginView from "./views/LoginView";
 import MoviesView from "./views/MoviesView";
 import DetailView from "./views/DetailView";
+import GenreView from "./views/GenreView";
 import { AuthProvider } from './AuthContext';
 import './App.css'
 
@@ -17,6 +18,7 @@ function App() {
           <Route path="/login" element={<LoginView />} />
           <Route path="/movies" element={<MoviesView />}>
             <Route path=":id" element={<DetailView />} />
+            <Route path="genre/:id" element={<GenreView />} />
           </Route>
         </Routes>
       </BrowserRouter>

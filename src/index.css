@@ -129,7 +129,7 @@
 .footerItem:hover{
   background-color: #f0e68c;
 }
-.section_title_featured{
+.section_title{
   width:100%;
   background-color: black;
   color: white;
@@ -137,17 +137,24 @@
   font-size: 50px;
   text-align: center;
 }
-.posterPicture{
-  width: 150px;
-  height: auto;
+
+.posterPicture {
+  height: 350px;
+  width: 250px;
 }
-.poster{
+
+.poster {
   background-color: lightgray;
   width: 250px;
-  height: auto;
+  height: 350px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
+  text-align: center;
+  display: flex;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
   transition: transform 0.2s, box-shadow 0.2s;
 }

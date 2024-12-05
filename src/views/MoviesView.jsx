@@ -1,12 +1,19 @@
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import Header from "../components/Header";
+import Genres from "../components/Genres";
 
 function MoviesView() {
-  
   return (
-    <div className="app-container">
+    <div className="movies-view-container">
       <Header />
-      <Outlet />
+      <div className="movies-content">
+        <div className="genres-sidebar">
+          <Genres />
+        </div>
+        <div className="movie-detail-area">
+          <Outlet />
+        </div>
+      </div>
     </div>
   );
 }

@@ -12,15 +12,12 @@ function Header() {
 
     return (
         <div className="header">
-            <button className="balance1"></button>
-            <button className="balance2"></button>
-            <span className="title">Gitflix</span>
-
+            <span className="title" onClick={() => navigate("/")}>Gitflix</span>
+            <span className="spacer"></span>
             {isLoggedIn ? (
                 <button className="logout" onClick={handleLogout}>Log Out</button>
             ) : (
                 <>
-                    <button className="balance2"></button>
                     <button className="signup" onClick={() => navigate("/register")}>Sign Up</button>
                     <button className="signin" onClick={() => navigate("/login")}>Sign In</button>
                 </>

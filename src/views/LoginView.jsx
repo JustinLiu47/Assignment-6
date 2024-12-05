@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../AuthContext';
+import Header from "../components/Header"
 
 function LoginView() {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
-  const { login } = useAuth(); 
+  const { login } = useAuth();
 
   function handleLogin(event) {
     event.preventDefault();
@@ -20,6 +21,7 @@ function LoginView() {
 
   return (
     <div className="login-container">
+      <Header />
       <div className="form-container">
         <h2>Login to Your Account</h2>
         <form onSubmit={handleLogin}>
@@ -38,7 +40,12 @@ function LoginView() {
 
           <button type="submit" className="login-button">Login</button>
         </form>
-        <p className="register-link">New to Netflix? <a href="#">Register now</a></p>
+        <p className="register-link">
+          New to Netflix? 
+          <span className="register-link-text" onClick={() => navigate('/register')}>
+            Register now
+          </span>
+        </p>
       </div>
     </div>
   );

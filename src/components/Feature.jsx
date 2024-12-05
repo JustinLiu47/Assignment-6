@@ -41,7 +41,7 @@ function Feature() {
 
     return (
         <div>
-            <div className="section_title_featured">Featured</div>
+            <div className="section_title">Featured</div>
             <div className="featured">
                 {movies.map((movie) => (
                     <div className="poster" key={movie.id} onClick={() => { loadMovie(movie.id) }}>

@@ -32,7 +32,6 @@ function DetailView() {
         />
       )}
 
-      {/* Trailers Section */}
       <div className="trailers-section">
         <h2>Trailers</h2>
         <div className="trailers-grid">
