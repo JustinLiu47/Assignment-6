@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 function Feature() {
     const [movies, setMovies] = useState([]);
     const navigate = useNavigate();
+
     function shuffle(array) {
         let currentIndex = array.length;
         while (currentIndex != 0) {
@@ -14,6 +15,11 @@ function Feature() {
                 array[randomIndex], array[currentIndex]];
         }
     }
+
+    function loadMovie(id) {
+        navigate(`/movies/${id}`);
+    }
+
     useEffect(() => {
         (async function getMovies() {
             const response = await axios.get(
@@ -34,10 +40,6 @@ function Feature() {
             setMovies(moviesList);
         })();
     }, []);
-
-    function loadMovie(id) {
-        navigate(`/movies/${id}`);
-    }
 
     return (
         <div>
