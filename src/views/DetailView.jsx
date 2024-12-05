@@ -23,6 +23,7 @@ function DetailView() {
       <div className="movie-info">
         <p><strong>Release Date:</strong> {movie.release_date}</p>
         <p><strong>Runtime:</strong> {movie.runtime} minutes</p>
+        <p><strong>Popularity:</strong> {movie.popularity}</p>
       </div>
       {movie.poster_path && (
         <img
