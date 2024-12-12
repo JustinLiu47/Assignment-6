@@ -94,7 +94,8 @@ body {
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  height: 100vh;
+  height: 100%;
+  min-height: 100vh;
   background: linear-gradient(90deg, rgb(200, 0, 0) 0%, rgb(45, 0, 0) 100%);
 }
 
@@ -139,6 +140,40 @@ form input:focus {
   box-shadow: 0 0 8px rgba(229, 9, 20, 0.8);
 }
 
+.genre-div {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.genre-div label {
+  display: flex;
+  align-items: center;
+  font-size: 0.9rem;
+  color: #d1d1d1;
+  padding: 5px;
+  cursor: pointer;
+  gap: 8px;
+}
+
+.genre-div input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  margin-right: 8px;
+  accent-color: #e50914;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.genre-div input[type="checkbox"]:checked {
+  background-color: #e50914;
+  box-shadow: 0 0 5px rgba(229, 9, 20, 0.8);
+}
+
+.genre-div input[type="checkbox"]:hover {
+  transform: scale(1.1);
+}
+
 .register-button,
 .login-button {
   width: 100%;
@@ -176,6 +211,12 @@ form input:focus {
 .register-link-text:hover {
   color: #f40612;
   text-decoration: underline;
+}
+
+.error {
+  color: red;
+  font-size: 1rem;
+  margin-top: 10px;
 }
 
 .movie-detail {
