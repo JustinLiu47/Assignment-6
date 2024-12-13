@@ -25,6 +25,12 @@ function LoginView() {
       <div className="form-container">
         <h2>Login to Your Account</h2>
         <form onSubmit={handleLogin}>
+          <label htmlFor="first-name">First Name</label>
+          <input type="text" id="first-name" name="first-name" required />
+
+          <label htmlFor="last-name">Last Name</label>
+          <input type="text" id="last-name" name="last-name" required />
+
           <label htmlFor="email">Email</label>
           <input type="email" id="email" name="email" required />
 

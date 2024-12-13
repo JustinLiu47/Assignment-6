@@ -6,22 +6,25 @@ import MoviesView from "./views/MoviesView";
 import DetailView from "./views/DetailView";
 import GenreView from "./views/GenreView";
 import { AuthProvider } from './context/AuthContext';
+import { RegistrationProvider } from './context/RegistrationContext';
 import './App.css'
 
 function App() {
   return (
     <AuthProvider>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<HomeView />} />
-          <Route path="/register" element={<RegisterView />} />
-          <Route path="/login" element={<LoginView />} />
-          <Route path="/movies" element={<MoviesView />}>
-            <Route path=":id" element={<DetailView />} />
-            <Route path="genre/:id" element={<GenreView />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
+      <RegistrationProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<HomeView />} />
+            <Route path="/register" element={<RegisterView />} />
+            <Route path="/login" element={<LoginView />} />
+            <Route path="/movies" element={<MoviesView />}>
+              <Route path=":id" element={<DetailView />} />
+              <Route path="genre/:id" element={<GenreView />} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      </RegistrationProvider>
     </AuthProvider>
   );
 }
