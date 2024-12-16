@@ -15,7 +15,11 @@ function Header() {
             <span className="title" onClick={() => navigate("/")}>Gitflix</span>
             <span className="spacer"></span>
             {isLoggedIn ? (
-                <button className="logout" onClick={handleLogout}>Log Out</button>
+                <>
+                    <button className="cart" onClick={() => navigate("/cart")}>Cart</button>
+                    <button className="settings" onClick={() => navigate("/settings")}>Settings</button>
+                    <button className="logout" onClick={handleLogout}>Log Out</button>
+                </>
             ) : (
                 <>
                     <button className="signup" onClick={() => navigate("/register")}>Sign Up</button>

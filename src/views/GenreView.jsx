@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
+import { useRegistration } from "../context/RegistrationContext";
 
 function GenreView() {
     const [movies, setMovies] = useState([]);
@@ -9,6 +10,8 @@ function GenreView() {
     const [totalPages, setTotalPages] = useState(1);
     const params = useParams();
     const navigate = useNavigate();
+    const { addToCart, currentUser, getCart } = useRegistration();
+    const cart = getCart();
 
     useEffect(() => {
         (async function getGenreMovies() {
@@ -27,6 +30,18 @@ function GenreView() {
     function loadMovie(id) {
         navigate(`/movies/${id}`);
     }
+
+    const handleAddToCart = (movie) => {
+        if (!currentUser) {
+            alert("You need to be logged in to add movies to your cart.");
+            return;
+        }
+        addToCart(movie);
+    };
+
+    const isMovieInCart = (movieId) => {
+        return cart.some((item) => item.id === movieId);
+    };
 
     const nextPage = () => {
         if (currentPage < totalPages) {
@@ -47,16 +62,19 @@ function GenreView() {
                 {movies.length > 0 ? (
                     movies.map((movie) => (
                         movie.poster_path ? (
-                            <div
-                                className="poster"
-                                key={movie.id}
-                                onClick={() => loadMovie(movie.id)}
-                            >
+                            <div className="poster" key={movie.id}>
                                 <img
                                     src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
                                     alt={movie.title}
                                     className="posterPicture"
+                                    onClick={() => loadMovie(movie.id)}
                                 />
+                                <button
+                                    className="buy-button"
+                                    onClick={() => handleAddToCart(movie)}
+                                >
+                                    {isMovieInCart(movie.id) ? "Added" : "Buy"}
+                                </button>
                             </div>
                         ) : null
                     ))

@@ -3,6 +3,27 @@ import { useNavigate } from 'react-router-dom';
 import { useRegistration } from '../context/RegistrationContext';
 import Header from "../components/Header";
 
+const genreList = [
+  { genre: "Action", id: 28 },
+  { genre: "Family", id: 10751 },
+  { genre: "Science Fiction", id: 878 },
+  { genre: "Adventure", id: 12 },
+  { genre: "Fantasy", id: 14 },
+  { genre: "Animation", id: 16 },
+  { genre: "History", id: 36 },
+  { genre: "Thriller", id: 53 },
+  { genre: "Comedy", id: 35 },
+  { genre: "Horror", id: 27 },
+  { genre: "War", id: 10752 },
+  { genre: "Crime", id: 80 },
+  { genre: "Music", id: 10402 },
+  { genre: "Western", id: 37 },
+  { genre: "Documentary", id: 99 },
+  { genre: "Mystery", id: 9648 },
+  { genre: "Drama", id: 18 },
+  { genre: "Romance", id: 10749 }
+];
+
 function RegisterView() {
   const navigate = useNavigate();
   const {
@@ -11,19 +32,27 @@ function RegisterView() {
     email,
     password,
     confirmPassword,
-    selectedGenres,
     errorMessage,
     handleInputChange,
     handleGenreChange,
     handleSubmit,
+    currentUser,
   } = useRegistration();
+
+  const enhancedHandleSubmit = async (event) => {
+    event.preventDefault();
+    const success = await handleSubmit(event);
+    if (success) {
+      navigate('/login');
+    }
+  };
 
   return (
     <div className="register-container">
       <Header />
       <div className="form-container">
         <h2>Create an Account</h2>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={enhancedHandleSubmit}>
           <label htmlFor="first-name">First Name</label>
           <input
             type="text"
@@ -76,16 +105,16 @@ function RegisterView() {
 
           <h2>Select Genres</h2>
           <div id="genre-div" className="genre-div">
-            {["28", "10751", "878", "12", "14", "16", "36", "53", "35", "27", "10752", "80", "10402", "37", "99", "9648", "18", "10749"].map((genreId) => (
-              <label key={genreId}>
+            {genreList.map(({ id, genre }) => (
+              <label key={id}>
                 <input
                   type="checkbox"
                   name="genre"
-                  value={genreId}
-                  onChange={handleGenreChange}
-                  checked={selectedGenres.includes(genreId)}
+                  value={id}
+                  onChange={() => handleGenreChange(id)}
+                  checked={currentUser?.selectedGenres.includes(id)}
                 />
-                {genreId}
+                {genre}
               </label>
             ))}
           </div>
