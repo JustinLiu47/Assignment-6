@@ -26,7 +26,7 @@ function CartView() {
                 {movie.posterPath && (
                   <img
                     className="cart-poster"
-                    src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
+                    src={`https://image.tmdb.org/t/p/original${movie.poster}`}
                     alt={movie.title}
                   />
                 )}
