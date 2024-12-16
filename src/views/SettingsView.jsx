@@ -33,60 +33,71 @@ function SettingsView() {
     handleGenreChange,
   } = useRegistration();
 
+  // Check if currentUser is available
   const [firstName, setFirstName] = useState(currentUser?.firstName || '');
   const [lastName, setLastName] = useState(currentUser?.lastName || '');
-  
-  const handleGenreChangeLocal = (id) => {
-    handleGenreChange(id);
-  };
+
+  // Update firstName and lastName when currentUser changes
+  useEffect(() => {
+    if (currentUser) {
+      setFirstName(currentUser.firstName || '');
+      setLastName(currentUser.lastName || '');
+    }
+  }, [currentUser]);
+
+  if (!currentUser) {
+    return <p>Please log in to update your profile.</p>;
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    updateUserDetails({ firstName, lastName, email: currentUser.email, selectedGenres });
+    if (currentUser) {
+      updateUserDetails({ firstName, lastName, email: currentUser.email, selectedGenres });
+    }
   };
-    return (
-        <div>
-            <Header />
-            <div className="profile-container">
 
-                <h2>Update Profile</h2>
-                <form onSubmit={handleSubmit}>
-                    <label>First Name</label>
-                    <input
-                        type="text"
-                        value={firstName}
-                        onChange={(e) => setFirstName(e.target.value)}
-                        required
-                    />
+  return (
+    <div>
+      <Header />
+      <div className="profile-container">
+        <h2>Update Profile</h2>
+        <form onSubmit={handleSubmit}>
+          <label>First Name</label>
+          <input
+            type="text"
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+            required
+          />
 
-                    <label>Last Name</label>
-                    <input
-                        type="text"
-                        value={lastName}
-                        onChange={(e) => setLastName(e.target.value)}
-                        required
-                    />
+          <label>Last Name</label>
+          <input
+            type="text"
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
+            required
+          />
 
-                    <h2>Select Genres</h2>
-                    <div id="genre-div" className="genre-div">
-                        {genreList.map(({ id, genre }) => (
-                            <label key={id}>
-                                <input
-                                    type="checkbox"
-                                    name="genre"
-                                    value={id}
-                                    onChange={() => handleGenreChange(id)}
-                                    checked={selectedGenres.includes(id)}
-                                />
-                                {genre}
-                            </label>
-                        ))}
-                    </div>
-                    <button type="submit" className="save-change-button">Save Changes</button>
-                </form>
-            </div>
-        </div>
-    );
+          <h2>Select Genres</h2>
+          <div id="genre-div" className="genre-div">
+            {genreList.map(({ id, genre }) => (
+              <label key={id}>
+                <input
+                  type="checkbox"
+                  name="genre"
+                  value={id}
+                  onChange={() => handleGenreChange(id)}
+                  checked={selectedGenres.includes(id)}
+                />
+                {genre}
+              </label>
+            ))}
+          </div>
+          <button type="submit" className="save-change-button">Save Changes</button>
+        </form>
+      </div>
+    </div>
+  );
 }
 
 export default SettingsView;

@@ -1,4 +1,11 @@
+import { useNavigate } from "react-router-dom";
 function Genres(props) {
+  const navigate = useNavigate();
+
+  const handleGenreClick = (genreId) => {
+      navigate(`/movies/genre/${genreId}`);
+    }
+
   return (
     <div className="genres-container">
       <h2 className="section-title">Browse by Genre</h2>

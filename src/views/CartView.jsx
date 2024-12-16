@@ -23,11 +23,17 @@ function CartView() {
                 <div className="movie-info">
                   <h2 className="movie-title">{movie.title}</h2>
                 </div>
-                {movie.posterPath && (
+                {movie.poster_path? (
                   <img
                     className="cart-poster"
-                    src={`https://image.tmdb.org/t/p/original${movie.poster}`}
+                    src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
                     alt={movie.title}
+                  />
+                ) : (
+                  <img
+                    className="cart-poster"
+                    src="https://via.placeholder.com/200x300?text=No+Poster"
+                    alt="No poster available"
                   />
                 )}
                 <button

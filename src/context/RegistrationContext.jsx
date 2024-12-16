@@ -14,9 +14,9 @@ export const RegistrationProvider = ({ children }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  
   const [cart, setCart] = useState([]);
 
+  // Register User
   const registerUser = (user) => {
     if (registeredUsers.some((u) => u.email === user.email)) {
       setErrorMessage('This email is already registered.');
@@ -28,6 +28,7 @@ export const RegistrationProvider = ({ children }) => {
     return true;
   };
 
+  // Login User
   const loginUser = (email, password) => {
     const user = registeredUsers.find((u) => u.email === email && u.password === password);
     if (user) {
@@ -40,25 +41,27 @@ export const RegistrationProvider = ({ children }) => {
     }
   };
 
+  // Update User Details
   const updateUserDetails = (updatedUser) => {
     if (
-      currentUser.firstName === updatedUser.firstName &&
-      currentUser.lastName === updatedUser.lastName &&
-      JSON.stringify(currentUser.selectedGenres) === JSON.stringify(updatedUser.selectedGenres)
+      currentUser?.firstName === updatedUser.firstName &&
+      currentUser?.lastName === updatedUser.lastName &&
+      JSON.stringify(currentUser?.selectedGenres) === JSON.stringify(updatedUser.selectedGenres)
     ) {
       return;
     }
-  
+
     const updatedUsers = registeredUsers.map((user) =>
       user.email === updatedUser.email ? { ...user, ...updatedUser } : user
     );
-  
+
     setRegisteredUsers(updatedUsers);
     setCurrentUser(updatedUser);
-  
+
     alert("Profile updated successfully!");
   };
 
+  // Handle Form Submit
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (!firstName || !lastName || !email || !password) {
@@ -88,6 +91,7 @@ export const RegistrationProvider = ({ children }) => {
     return true;
   };
 
+  // Handle Input Change
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     if (name === 'firstName') setFirstName(value);
@@ -97,6 +101,7 @@ export const RegistrationProvider = ({ children }) => {
     if (name === 'confirmPassword') setConfirmPassword(value);
   };
 
+  // Handle Genre Change
   const handleGenreChange = (id) => {
     setSelectedGenres((prevSelectedGenres) =>
       prevSelectedGenres.includes(id)
@@ -105,37 +110,42 @@ export const RegistrationProvider = ({ children }) => {
     );
   };
 
+  // Add Movie to Cart
   const addToCart = (movie) => {
     if (!currentUser) {
       setErrorMessage('You need to be logged in to add items to the cart.');
       return;
     }
-    const updatedCart = [...cart, movie];
+    const updatedCart = [...(currentUser.cart || []), movie]; // Ensure cart is always an array
     setCart(updatedCart);
     const updatedUser = { ...currentUser, cart: updatedCart };
     setCurrentUser(updatedUser);
     updateUserDetails(updatedUser);
   };
 
+  // Remove Movie from Cart
   const removeFromCart = (movieId) => {
     if (!currentUser) {
       setErrorMessage('You need to be logged in to remove items from the cart.');
       return;
     }
-    const updatedCart = cart.filter((movie) => movie.id !== movieId);
+    const updatedCart = (currentUser.cart || []).filter((movie) => movie.id !== movieId); // Ensure cart is an array
     setCart(updatedCart);
     const updatedUser = { ...currentUser, cart: updatedCart };
     setCurrentUser(updatedUser);
     updateUserDetails(updatedUser);
   };
 
+  // Get Cart - Safe Access
   const getCart = () => {
-    return currentUser ? currentUser.cart : [];
+    return currentUser ? currentUser.cart || [] : [];
   };
-  
+
+  // Check if Movie is in Cart - Safe Access
   const isMovieInCart = (movieId) => {
-    return currentUser?.cart?.some((movie) => movie.id === movieId);
+    return currentUser?.cart?.some((movie) => movie.id === movieId) || false;
   };
+
   return (
     <RegistrationContext.Provider
       value={{
@@ -156,7 +166,6 @@ export const RegistrationProvider = ({ children }) => {
         addToCart,
         removeFromCart,
         getCart,
-        addToCart,
         isMovieInCart,
       }}
     >
