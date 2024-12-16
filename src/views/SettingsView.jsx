@@ -43,7 +43,6 @@ function SettingsView() {
   const handleSubmit = (e) => {
     e.preventDefault();
     updateUserDetails({ firstName, lastName, email: currentUser.email, selectedGenres });
-    navigate('/');
   };
     return (
         <div>
