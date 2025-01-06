@@ -31,13 +31,12 @@ function SettingsView() {
     updateUserDetails,
     selectedGenres,
     handleGenreChange,
+    errorMessage, // Use errorMessage from context to show errors
   } = useRegistration();
 
-  // Check if currentUser is available
   const [firstName, setFirstName] = useState(currentUser?.firstName || '');
   const [lastName, setLastName] = useState(currentUser?.lastName || '');
 
-  // Update firstName and lastName when currentUser changes
   useEffect(() => {
     if (currentUser) {
       setFirstName(currentUser.firstName || '');
@@ -51,6 +50,12 @@ function SettingsView() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    // Check for genre selection count
+    if (selectedGenres.length < 10) {
+      alert('Please select at least 10 genres.');
+      return;
+    }
+
     if (currentUser) {
       updateUserDetails({ firstName, lastName, email: currentUser.email, selectedGenres });
     }
@@ -93,7 +98,15 @@ function SettingsView() {
               </label>
             ))}
           </div>
-          <button type="submit" className="save-change-button">Save Changes</button>
+          {errorMessage && <p className="error">{errorMessage}</p>}
+
+          <button
+            type="submit"
+            className="save-change-button"
+            disabled={selectedGenres.length < 10}
+          >
+            Save Changes
+          </button>
         </form>
       </div>
     </div>

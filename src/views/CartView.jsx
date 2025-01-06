@@ -23,16 +23,17 @@ function CartView() {
                 <div className="movie-info">
                   <h2 className="movie-title">{movie.title}</h2>
                 </div>
-                {movie.poster_path? (
+                {movie.poster_path ? (
                   <img
-                    className="cart-poster"
+                    className="posterPicture"
                     src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
                     alt={movie.title}
+                    onClick={() => loadMovie(movie.id)}
                   />
                 ) : (
                   <img
-                    className="cart-poster"
-                    src="https://via.placeholder.com/200x300?text=No+Poster"
+                    className="posterPicture"
+                    src=""
                     alt="No poster available"
                   />
                 )}
